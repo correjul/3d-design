@@ -1,0 +1,34 @@
+//declare variables
+int sensor1 = A0;
+int sensor2 = A1;
+int sensor3 = A2;
+int lasers = 5;
+int speaker = 3;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(lasers, OUTPUT);
+}
+
+void loop() {
+  // take readings from sensors
+  int reading3 = analogRead(sensor3);
+  int reading1 = analogRead(sensor1);
+  int reading2 = analogRead(sensor2);
+
+  //turn on lasers
+  digitalWrite(lasers, HIGH);
+
+  //check which sensor has been triggered 
+  if (reading1 < 400) {
+    tone(speaker, 440, 100);
+    Serial.print("ONE");
+  } else if (reading2 < 200) {
+    tone(speaker, 262, 100);
+    Serial.print("TWO");
+  } else if (reading3 < 400) {
+    tone(speaker, 329, 100);
+    Serial.print("THREE");
+  }
+}
